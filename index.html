@@ -1,0 +1,365 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>La Gazette des Sorciers</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&display=swap');
+
+:root {
+  --paper: #f3ead8;
+  --ink: #342b25;
+  --gold: #a78a56;
+  --green: #304c38;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse at center, #514537, #211d19);
+  color: var(--ink);
+  font-family: 'Cormorant Garamond', Georgia, serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 35px 15px;
+}
+
+.newspaper {
+  width: min(900px, 100%);
+  background: var(--paper);
+  padding: 24px;
+  box-shadow: 0 15px 55px #0009;
+  border: 1px solid #c1a879;
+  position: relative;
+}
+
+.inner-border {
+  border: 1px solid var(--gold);
+  padding: 25px;
+  position: relative;
+  min-height: 650px;
+}
+
+.masthead {
+  text-align: center;
+  border-bottom: 3px double var(--gold);
+  padding-bottom: 15px;
+}
+
+.edition {
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  font-size: 11px;
+}
+
+.masthead h1 {
+  font-size: clamp(32px, 7vw, 65px);
+  line-height: 1;
+  margin: 12px 0 5px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.subtitle {
+  font-size: 17px;
+  font-style: italic;
+  letter-spacing: 2px;
+}
+
+.signature {
+  font-family: 'Great Vibes', cursive;
+  font-size: 30px;
+  color: var(--green);
+  margin-top: 8px;
+}
+
+.page {
+  padding: 25px 12px 10px;
+  min-height: 420px;
+  transition: opacity .35s, transform .55s;
+  transform-origin: left center;
+}
+
+.page.turning {
+  opacity: 0;
+  transform: perspective(900px) rotateY(-22deg);
+}
+
+.page-number {
+  text-align: center;
+  color: var(--gold);
+  letter-spacing: 3px;
+  font-size: 12px;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+
+.headline {
+  font-size: clamp(28px, 5vw, 44px);
+  text-align: center;
+  line-height: 1.05;
+  margin: 10px auto;
+  max-width: 720px;
+  font-weight: 700;
+}
+
+.dek {
+  text-align: center;
+  font-style: italic;
+  font-size: 19px;
+  margin: 12px auto 22px;
+  max-width: 650px;
+}
+
+.ornament {
+  text-align: center;
+  color: var(--gold);
+  letter-spacing: 8px;
+  margin: 16px 0;
+}
+
+.article {
+  font-size: 19px;
+  line-height: 1.65;
+  text-align: justify;
+  max-width: 680px;
+  margin: auto;
+}
+
+.article p:first-child:first-letter {
+  float: left;
+  font-size: 55px;
+  line-height: .8;
+  padding: 7px 7px 0 0;
+  color: var(--green);
+}
+
+.byline {
+  text-align: right;
+  font-family: 'Great Vibes', cursive;
+  font-size: 28px;
+  color: var(--green);
+  margin: 20px 10px;
+}
+
+.controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 18px;
+  border-top: 1px solid var(--gold);
+  padding-top: 18px;
+}
+
+.controls button {
+  background: var(--green);
+  color: #f3ead8;
+  border: 1px solid var(--gold);
+  padding: 11px 22px;
+  font-family: inherit;
+  font-size: 17px;
+  cursor: pointer;
+  transition: .2s;
+}
+
+.controls button:hover {
+  background: #48664e;
+  transform: translateY(-2px);
+}
+
+#pageCount {
+  font-style: italic;
+  font-size: 15px;
+}
+
+.quill {
+  position: absolute;
+  right: 20px;
+  top: 180px;
+  font-size: 42px;
+  transform: rotate(-25deg);
+  animation: writing 2.8s ease-in-out infinite;
+  transform-origin: bottom center;
+  pointer-events: none;
+}
+
+@keyframes writing {
+  0%, 100% { transform: rotate(-25deg) translateY(0); }
+  50% { transform: rotate(-17deg) translateY(-7px); }
+}
+
+.beetle {
+  position: absolute;
+  left: 18px;
+  bottom: 24px;
+  font-size: 23px;
+  cursor: pointer;
+  animation: crawl 8s ease-in-out infinite alternate;
+  z-index: 3;
+}
+
+@keyframes crawl {
+  from { transform: translateX(0) rotate(-12deg); }
+  to { transform: translateX(65px) rotate(15deg); }
+}
+
+.footer {
+  text-align: center;
+  font-size: 12px;
+  letter-spacing: 3px;
+  color: var(--gold);
+  margin-top: 22px;
+}
+
+@media(max-width:600px) {
+  .newspaper { padding: 12px; }
+  .inner-border { padding: 15px 10px; }
+  .page { padding: 20px 5px; }
+  .quill { font-size: 30px; right: 8px; top: 150px; }
+  .article { font-size: 17px; }
+}
+</style>
+</head>
+
+<body>
+
+<div class="newspaper">
+  <div class="inner-border">
+
+    <header class="masthead">
+      <div class="edition">Édition spéciale · Novembre 1994</div>
+      <h1>La Gazette des Sorciers</h1>
+      <div class="subtitle">Le monde magique n'a plus de secrets</div>
+      <div class="signature">Les Chroniques indiscrètes de Rita</div>
+    </header>
+
+    <div class="quill">🪶</div>
+    <div class="beetle" title="Un petit visiteur indiscret">🪲</div>
+
+    <main id="page" class="page">
+
+      <div class="page-number">Chronique numéro 001</div>
+
+      <h2 class="headline">
+        Le Tournoi des Trois Sorciers :
+        que nous cache-t-on ?
+      </h2>
+
+      <div class="ornament">✦ ❧ ✦</div>
+
+      <p class="dek">
+        Trois écoles, une compétition légendaire…
+        et quelques langues qui feraient mieux de rester dans leurs poches.
+      </p>
+
+      <div class="article">
+        <p>
+          Mes chers lecteurs, il semblerait que le château de
+          Poudlard soit sur le point de devenir le théâtre
+          d'événements particulièrement intéressants.
+          L'arrivée de deux délégations étrangères ne passe
+          évidemment pas inaperçue, et les couloirs bruissent
+          déjà de conversations fort instructives.
+        </p>
+
+        <p>
+          Beauxbâtons et Durmstrang ont posé leurs valises,
+          leurs élèves leurs regards, et certains adultes
+          semblent avoir soudainement retrouvé le goût des
+          grandes cérémonies.
+        </p>
+
+        <p>
+          Mais derrière les sourires de circonstance,
+          qui sait ce qui se trame réellement ?
+          Votre humble servante, elle, garde les yeux ouverts.
+        </p>
+      </div>
+
+      <div class="byline">Votre dévouée, Rita Skeeter</div>
+
+    </main>
+
+    <div class="controls">
+      <button onclick="turnPage(-1)">← Précédent</button>
+      <span id="pageCount">1 / 2</span>
+      <button onclick="turnPage(1)">Suivant →</button>
+    </div>
+
+    <div class="footer">
+      LA PLUME N'OUBLIE JAMAIS
+    </div>
+
+  </div>
+</div>
+
+<script>
+const articles = [
+  {
+    number: "Chronique numéro 001",
+    title: "Le Tournoi des Trois Sorciers : que nous cache-t-on ?",
+    subtitle: "Trois écoles, une compétition légendaire… et quelques langues qui feraient mieux de rester dans leurs poches.",
+    paragraphs: [
+      "Mes chers lecteurs, il semblerait que le château de Poudlard soit sur le point de devenir le théâtre d'événements particulièrement intéressants. L'arrivée de deux délégations étrangères ne passe évidemment pas inaperçue, et les couloirs bruissent déjà de conversations fort instructives.",
+      "Beauxbâtons et Durmstrang ont posé leurs valises, leurs élèves leurs regards, et certains adultes semblent avoir soudainement retrouvé le goût des grandes cérémonies.",
+      "Mais derrière les sourires de circonstance, qui sait ce qui se trame réellement ? Votre humble servante, elle, garde les yeux ouverts."
+    ]
+  },
+  {
+    number: "Chronique numéro 002",
+    title: "Les salons ont des oreilles…",
+    subtitle: "Dans la bonne société sorcière, les apparences sont parfois les secrets les mieux gardés.",
+    paragraphs: [
+      "Mes chers lecteurs, une réception mondaine n'est jamais tout à fait innocente. Derrière les politesses et les compliments échangés se cachent parfois des rivalités anciennes, des alliances inattendues et quelques regards qui en disent bien plus que les mots.",
+      "Les familles les plus respectables savent entretenir leur réputation. Mais savent-elles toujours garder leurs secrets ?",
+      "Je vous conseille de surveiller les prochains événements. Certaines conversations pourraient bien faire couler beaucoup d'encre."
+    ]
+  }
+];
+
+let currentPage = 0;
+let isTurning = false;
+
+function turnPage(direction) {
+  if (isTurning) return;
+
+  const next = currentPage + direction;
+  if (next < 0 || next >= articles.length) return;
+
+  isTurning = true;
+  const page = document.getElementById("page");
+  page.classList.add("turning");
+
+  setTimeout(() => {
+    currentPage = next;
+    const article = articles[currentPage];
+
+    page.innerHTML = `
+      <div class="page-number">${article.number}</div>
+      <h2 class="headline">${article.title}</h2>
+      <div class="ornament">✦ ❧ ✦</div>
+      <p class="dek">${article.subtitle}</p>
+      <div class="article">
+        ${article.paragraphs.map(p => `<p>${p}</p>`).join("")}
+      </div>
+      <div class="byline">Votre dévouée, Rita Skeeter</div>
+    `;
+
+    document.getElementById("pageCount").textContent =
+      `${currentPage + 1} / ${articles.length}`;
+
+    page.classList.remove("turning");
+    isTurning = false;
+  }, 350);
+}
+</script>
+
+</body>
+</html>
