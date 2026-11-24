@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>La Gazette des Sorciers</title>
-
+f
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&display=swap');
 
@@ -41,6 +41,7 @@ body {
 }
 
 .inner-border {
+  perspective: 1400px;
   border: 1px solid var(--gold);
   padding: 25px;
   position: relative;
@@ -83,13 +84,15 @@ body {
 .page {
   padding: 25px 12px 10px;
   min-height: 420px;
-  transition: opacity .35s, transform .55s;
+  transition: opacity .55s, transform .75s;
   transform-origin: left center;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
 }
 
 .page.turning {
   opacity: 0;
-  transform: perspective(900px) rotateY(-22deg);
+  transform: rotateY(-85deg);
 }
 
 .page-number {
@@ -357,7 +360,7 @@ function turnPage(direction) {
 
     page.classList.remove("turning");
     isTurning = false;
-  }, 350);
+  }, 750);
 }
 </script>
 
