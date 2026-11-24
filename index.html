@@ -182,21 +182,65 @@ body {
   font-size: 15px;
 }
 
+
 .quill {
   position: absolute;
   right: 20px;
   top: 180px;
   font-size: 42px;
+  line-height: 1;
   transform: rotate(-25deg);
-  animation: writing 2.8s ease-in-out infinite;
-  transform-origin: bottom center;
+  transform-origin: 80% 80%;
+  animation: writing 2.4s ease-in-out infinite;
   pointer-events: none;
+  z-index: 2;
+}
+
+.quill::after {
+  content: "";
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  background: #304c38;
+  border-radius: 50%;
+  right: 3px;
+  bottom: 0;
+  opacity: 0;
+  box-shadow:
+    0 7px 0 -1px #304c38,
+    0 14px 0 -2px #304c38;
+  animation: ink 2.4s ease-in-out infinite;
 }
 
 @keyframes writing {
-  0%, 100% { transform: rotate(-25deg) translateY(0); }
-  50% { transform: rotate(-17deg) translateY(-7px); }
+  0%, 100% {
+    transform: rotate(-25deg) translate(0, 0);
+  }
+  25% {
+    transform: rotate(-17deg) translate(-3px, 2px);
+  }
+  50% {
+    transform: rotate(-29deg) translate(2px, 4px);
+  }
+  75% {
+    transform: rotate(-19deg) translate(-2px, 1px);
+  }
 }
+
+@keyframes ink {
+  0%, 100% {
+    opacity: 0;
+    transform: translate(0, 0) scale(.5);
+  }
+  35% {
+    opacity: .85;
+  }
+  65% {
+    opacity: 0;
+    transform: translate(-5px, 12px) scale(1.2);
+  }
+}
+
 
 .beetle {
   position: absolute;
